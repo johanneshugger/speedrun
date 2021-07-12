@@ -234,7 +234,7 @@ class WandBSweepMixin(WandBMixin):
         else:
             return super(WandBSweepMixin, self).parse_experiment_directory()
 
-    def auto_setup(self, update_git_revision=True, dump_configuration=True):
+    def wandb_auto_setup(self, update_git_revision=True, dump_configuration=True):
         super_return = super(WandBSweepMixin, self).auto_setup()
         if self.get_arg('wandb.sweep', False):
             self.update_configuration_from_wandb(dump_configuration=True)

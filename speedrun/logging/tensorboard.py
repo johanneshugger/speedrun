@@ -1,7 +1,8 @@
 import os
 from contextlib import contextmanager
 try:
-    import tensorboardX as tx
+    from torch.utils import tensorboard as tx
+    # import tensorboardX as tx
 except ImportError:
     tx = None
 
@@ -15,7 +16,7 @@ class TensorboardMixin(object):
         # Build logger if it doesn't exist
         if not hasattr(self, '_logger'):
             # noinspection PyUnresolvedReferences,PyAttributeOutsideInit
-            self._logger = tx.SummaryWriter(logdir=self.log_directory)
+            self._logger = tx.SummaryWriter(log_dir=self.log_directory)
             # noinspection PyUnresolvedReferences
             self._meta_config['exclude_attrs_from_save'].append('_logger')
         return self._logger

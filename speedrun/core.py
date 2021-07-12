@@ -778,11 +778,15 @@ class BaseExperiment(object):
         if inherit_from is not None:
             # Inherit configuration file
             self.inherit_configuration(inherit_from, read=False)
-        try:
-            self.read_config_file()
-        except FileNotFoundError:
-            # No config file found, experiment._config remains an empty dict.
-            pass
+        if self.get_arg('path_to_config', None):
+            self.read_config_file(path=self.get_arg('path_to_config'))
+        else:
+            try:
+                self.read_config_file()
+            except FileNotFoundError:
+                # No config file found, experiment._config remains an empty dict.
+                pass
+
         # Read macro if available
         self.read_macro()
         # Update config from commandline args
