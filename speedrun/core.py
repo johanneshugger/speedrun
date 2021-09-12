@@ -263,6 +263,10 @@ class BaseExperiment(object):
                 self.set(tag, value)
         return self
 
+    def update_configuration_from_dict(self, config_dict):
+        for key, value in config_dict.items():
+            self.set(key, value)
+
     def register_unpickleable(self, *attributes):
         """
         Specify the attributes that are not pickleable. If the experiment contains
